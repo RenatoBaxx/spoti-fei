@@ -3,16 +3,25 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/renat/Downloads/Exemplo_CRUD/Exemplo_CRUD/src/controller/ControllerCadastro.java</file>
-            <file>file:/C:/Users/renat/Downloads/Exemplo_CRUD/Exemplo_CRUD/src/controller/ControllerLogin.java</file>
-            <file>file:/C:/Users/renat/Downloads/Exemplo_CRUD/Exemplo_CRUD/src/aula11ex01/Aula11Ex01.java</file>
-            <file>file:/C:/Users/renat/Downloads/Exemplo_CRUD/Exemplo_CRUD/src/DAO/AlunoDAO.java</file>
-            <file>file:/C:/Users/renat/Downloads/Exemplo_CRUD/Exemplo_CRUD/src/DAO/Conexao.java</file>
-            <file>file:/C:/Users/renat/Downloads/Exemplo_CRUD/Exemplo_CRUD/src/model/Aluno.java</file>
-            <file>file:/C:/Users/renat/Downloads/Exemplo_CRUD/Exemplo_CRUD/src/view/AltExcFrame.java</file>
-            <file>file:/C:/Users/renat/Downloads/Exemplo_CRUD/Exemplo_CRUD/src/view/CadastroFrame.java</file>
-            <file>file:/C:/Users/renat/Downloads/Exemplo_CRUD/Exemplo_CRUD/src/view/LoginFrame.java</file>
-            <file>file:/C:/Users/renat/Downloads/Exemplo_CRUD/Exemplo_CRUD/src/controller/ControllerUsuario.java</file>
+            <file>file:/C:/Users/RJUTWE/OneDrive%20-%20Scania%20CV/Projects/spoti-fei/src/view/LoginFrame.java</file>
+            <file>file:/C:/Users/RJUTWE/OneDrive%20-%20Scania%20CV/Projects/spoti-fei/src/DAO/Conexao.java</file>
+            <file>file:/C:/Users/RJUTWE/OneDrive%20-%20Scania%20CV/Projects/spoti-fei/src/controller/ControllerCadastro.java</file>
+            <file>file:/C:/Users/RJUTWE/OneDrive%20-%20Scania%20CV/Projects/spoti-fei/src/DAO/AlunoDAO.java</file>
+            <file>file:/C:/Users/RJUTWE/OneDrive%20-%20Scania%20CV/Projects/spoti-fei/src/view/CadastroFrame.java</file>
+            <file>file:/C:/Users/RJUTWE/OneDrive%20-%20Scania%20CV/Projects/spoti-fei/src/model/Aluno.java</file>
+            <file>file:/C:/Users/RJUTWE/OneDrive%20-%20Scania%20CV/Projects/spoti-fei/src/controller/ControllerLogin.java</file>
+            <file>file:/C:/Users/RJUTWE/OneDrive%20-%20Scania%20CV/Projects/spoti-fei/src/view/AltExcFrame.java</file>
+            <file>file:/C:/Users/RJUTWE/OneDrive%20-%20Scania%20CV/Projects/spoti-fei/src/view/Home.java</file>
+            <file>file:/C:/Users/RJUTWE/OneDrive%20-%20Scania%20CV/Projects/spoti-fei/src/model/Artista.java</file>
+            <file>file:/C:/Users/RJUTWE/OneDrive%20-%20Scania%20CV/Projects/spoti-fei/src/model/Musica.java</file>
+            <file>file:/C:/Users/RJUTWE/OneDrive%20-%20Scania%20CV/Projects/spoti-fei/src/model/Playlist.java</file>
+            <file>file:/C:/Users/RJUTWE/OneDrive%20-%20Scania%20CV/Projects/spoti-fei/src/model/PlaylistMusica.java</file>
+            <file>file:/C:/Users/RJUTWE/OneDrive%20-%20Scania%20CV/Projects/spoti-fei/src/DAO/MusicaDAO.java</file>
+            <file>file:/C:/Users/RJUTWE/OneDrive%20-%20Scania%20CV/Projects/spoti-fei/src/controller/ControllerMusica.java</file>
+            <file>file:/C:/Users/RJUTWE/OneDrive%20-%20Scania%20CV/Projects/spoti-fei/build.xml</file>
+            <file>file:/C:/Users/RJUTWE/OneDrive%20-%20Scania%20CV/Projects/spoti-fei/src/view/PlaylistFrame.java</file>
+            <file>file:/C:/Users/RJUTWE/OneDrive%20-%20Scania%20CV/Projects/spoti-fei/src/view/CurtidasFrame.java</file>
+            <file>file:/C:/Users/RJUTWE/OneDrive%20-%20Scania%20CV/Projects/spoti-fei/src/view/HistoricoFrame.java</file>
         </group>
     </open-files>
 </project-private>
