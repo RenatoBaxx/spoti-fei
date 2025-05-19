@@ -59,7 +59,7 @@
           <Group type="103" rootIndex="1" groupAlignment="0" attributes="0">
               <Group type="102" attributes="0">
                   <EmptySpace max="-2" attributes="0"/>
-                  <Component id="lbl_nome_altexc" pref="376" max="32767" attributes="0"/>
+                  <Component id="lbl_nome_altexc" pref="962" max="32767" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
               </Group>
           </Group>
@@ -124,7 +124,7 @@
                       <Group type="102" alignment="0" attributes="0">
                           <Component id="lbl_senha_altexc" min="-2" max="-2" attributes="0"/>
                           <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                          <Component id="txt_senha_altexc" pref="256" max="32767" attributes="0"/>
+                          <Component id="txt_senha_altexc" pref="854" max="32767" attributes="0"/>
                       </Group>
                       <Group type="102" alignment="1" attributes="0">
                           <EmptySpace min="0" pref="0" max="32767" attributes="0"/>

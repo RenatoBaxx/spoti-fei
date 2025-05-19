@@ -41,6 +41,4 @@ public class Aluno {
     public String toString() {
         return "Aluno{" + "nome=" + nome + ", usuario=" + usuario + ", senha=" + senha + '}';
     }
-    
-    
 }

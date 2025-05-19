@@ -12,7 +12,7 @@ public class AlunoDAO {
     private Connection conn;
 
     public AlunoDAO(Connection codnn) {
-        this.conn = conn;
+        this.conn = codnn;
     }
     
     public ResultSet consultar(Aluno aluno) throws SQLException{
