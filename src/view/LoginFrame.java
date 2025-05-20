@@ -12,6 +12,8 @@ public class LoginFrame extends javax.swing.JFrame {
         initComponents();
         c = new ControllerLogin(this);
     }
+    
+    
 
     public JButton getBt_cadastro() {
         return bt_cadastro;
