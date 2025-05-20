@@ -10,6 +10,7 @@ import javax.swing.JOptionPane;
 import model.Aluno;
 import view.AltExcFrame;
 import view.LoginFrame;
+import view.Home;
 
 
 public class ControllerLogin {
@@ -36,8 +37,10 @@ public class ControllerLogin {
                 Aluno aluno2 = new Aluno(res.getString("nome"), 
                                          res.getString("usuario"), 
                                          res.getString("senha"));
-                AltExcFrame aec = new AltExcFrame(aluno2);
-                aec.setVisible(true);
+               Home home = new Home(conn, aluno2); 
+               home.setVisible(true);
+               view.dispose(); 
+
             } else{
                 JOptionPane.showMessageDialog(view, 
                                               "Login NÃO efetuado!", 
