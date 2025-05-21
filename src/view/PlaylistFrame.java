@@ -4,32 +4,43 @@
  */
 package view;
 
+import controller.ControllerHome;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
-import view.Home;
+import model.Aluno;
+import java.sql.Connection;
+import javax.swing.JButton;
+import view.PlaylistFrame;
+import view.CurtidasFrame;
+import view.HistoricoFrame;
 
 /**
  *
  * @author RJUTWE
  */
 public class PlaylistFrame extends javax.swing.JFrame {
+    private Connection conn;
+    private Aluno aluno;
 
     /**
      * Creates new form PlaylistFrame
      */
-    public PlaylistFrame() {
+    public PlaylistFrame(Connection conn, Aluno aluno) {
+        this.conn = conn;
+        this.aluno = aluno;
         initComponents();
+        Nomeapp.setText(aluno.getNome());
     }
 
     public JLabel getjLabel1() {
-        return jLabel1;
+        return Nomeapp;
     }
 
     public void setjLabel1(JLabel jLabel1) {
-        this.jLabel1 = jLabel1;
+        this.Nomeapp = jLabel1;
     }
 
     public JLabel getjLabel10() {
@@ -185,7 +196,7 @@ public class PlaylistFrame extends javax.swing.JFrame {
         jLabel13 = new javax.swing.JLabel();
         jLabel15 = new javax.swing.JLabel();
         jLabel14 = new javax.swing.JLabel();
-        jLabel1 = new javax.swing.JLabel();
+        Nomeapp = new javax.swing.JLabel();
         jTextField1 = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
@@ -331,9 +342,9 @@ public class PlaylistFrame extends javax.swing.JFrame {
                 .addGap(15, 15, 15))
         );
 
-        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/user.png"))); // NOI18N
-        jLabel1.setText("Nome");
+        Nomeapp.setForeground(new java.awt.Color(255, 255, 255));
+        Nomeapp.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/user.png"))); // NOI18N
+        Nomeapp.setText("Nome");
 
         jTextField1.setBackground(new java.awt.Color(51, 51, 51));
         jTextField1.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
@@ -374,7 +385,7 @@ public class PlaylistFrame extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 19, Short.MAX_VALUE)
-                        .addComponent(jLabel1)
+                        .addComponent(Nomeapp)
                         .addGap(36, 36, 36))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(11, 11, 11)
@@ -393,7 +404,7 @@ public class PlaylistFrame extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jLabel1)
+                        .addComponent(Nomeapp)
                         .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 36, Short.MAX_VALUE)
                 .addComponent(jLabel2)
@@ -417,13 +428,13 @@ public class PlaylistFrame extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jLabel9MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel9MouseClicked
-        CurtidasFrame cf = new CurtidasFrame();
+        CurtidasFrame cf = new CurtidasFrame(conn, aluno);
         cf.setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_jLabel9MouseClicked
 
     private void jLabel10MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel10MouseClicked
-        HistoricoFrame hf = new HistoricoFrame();
+        HistoricoFrame hf = new HistoricoFrame(conn, aluno);
         hf.setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_jLabel10MouseClicked
@@ -444,7 +455,7 @@ public class PlaylistFrame extends javax.swing.JFrame {
      * @param args the command line arguments
      */
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel Nomeapp;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
