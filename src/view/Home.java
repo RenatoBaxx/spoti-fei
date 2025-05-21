@@ -176,6 +176,8 @@ import view.HistoricoFrame;
     public void setBtn_search(JButton btn_search) {
         this.btn_search = btn_search;
     }
+   
+
     
     
     ////////REDIRECIONAMENTO//////////
@@ -467,19 +469,19 @@ import view.HistoricoFrame;
     }// </editor-fold>//GEN-END:initComponents
 
     private void jLabel6MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel6MouseClicked
-        PlaylistFrame pf = new PlaylistFrame();
+        PlaylistFrame pf = new PlaylistFrame(c.getConnection(), c.getAluno());
         pf.setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_jLabel6MouseClicked
 
     private void jLabel8MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel8MouseClicked
-        CurtidasFrame cf = new CurtidasFrame();
-        cf.setVisible(true);
-        this.setVisible(false);
+    CurtidasFrame cf = new CurtidasFrame(c.getConnection(), c.getAluno());
+    cf.setVisible(true);
+    this.setVisible(false);
     }//GEN-LAST:event_jLabel8MouseClicked
 
     private void jLabel10MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel10MouseClicked
-        HistoricoFrame hf = new HistoricoFrame();
+        HistoricoFrame hf = new HistoricoFrame(c.getConnection(), c.getAluno());
         hf.setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_jLabel10MouseClicked

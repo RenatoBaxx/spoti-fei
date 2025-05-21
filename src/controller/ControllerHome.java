@@ -18,6 +18,12 @@ public class ControllerHome {
     private Aluno aluno;
     private Home home;
 
+    public ControllerHome(Connection conn, Aluno aluno) {
+        this.conn = conn;
+        this.aluno = aluno;
+        this.home = null;
+    }
+
     public ControllerHome(Connection conn, Aluno aluno, Home home) {
         this.conn = conn;
         this.aluno = aluno;
@@ -109,4 +115,12 @@ public class ControllerHome {
         }
         home.getjTable1().setModel(modelo);
     }
+    public Connection getConnection() {
+        return conn;
+    }
+
+    public Aluno getAluno() {
+        return aluno;
+    }
+
 }

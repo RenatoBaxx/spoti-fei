@@ -9,26 +9,49 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
+import controller.ControllerCurtida;
+import model.Aluno;
+import DAO.Conexao;
+import java.sql.Connection;
+import controller.ControllerHome;
+
+
+
+
+
 
 /**
  *
  * @author RJUTWE
  */
 public class CurtidasFrame extends javax.swing.JFrame {
+    private Connection conn;
+    private Aluno aluno;
+    private ControllerCurtida controllerCurtida;
 
-    /**
-     * Creates new form CurtidasFrame
-     */
-    public CurtidasFrame() {
+
+
+
+    public CurtidasFrame(Connection conn, Aluno aluno) {
+        this.conn = conn;
+        this.aluno = aluno;
         initComponents();
+        Nomeapp.setText(aluno.getNome());
+        controllerCurtida = new ControllerCurtida(conn, aluno); // já que você só usa Curtida
+        carregarMusicasCurtidas();
+    }
+    
+    private void carregarMusicasCurtidas() {
+    jTable1.setModel(controllerCurtida.getTabelaMusicasCurtidas());
     }
 
+
     public JLabel getjLabel1() {
-        return jLabel1;
+        return Nomeapp;
     }
 
     public void setjLabel1(JLabel jLabel1) {
-        this.jLabel1 = jLabel1;
+        this.Nomeapp = jLabel1;
     }
 
     public JLabel getjLabel10() {
@@ -183,13 +206,15 @@ public class CurtidasFrame extends javax.swing.JFrame {
         jLabel13 = new javax.swing.JLabel();
         jLabel15 = new javax.swing.JLabel();
         jLabel14 = new javax.swing.JLabel();
-        jLabel1 = new javax.swing.JLabel();
+        Nomeapp = new javax.swing.JLabel();
         jTextField1 = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
         jLabel2 = new javax.swing.JLabel();
-        jTextField2 = new javax.swing.JTextField();
+        lbl_id = new javax.swing.JTextField();
+        btn_fav = new javax.swing.JButton();
+        btn_delete_curtida = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -334,9 +359,9 @@ public class CurtidasFrame extends javax.swing.JFrame {
                 .addGap(15, 15, 15))
         );
 
-        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/user.png"))); // NOI18N
-        jLabel1.setText("Nome");
+        Nomeapp.setForeground(new java.awt.Color(255, 255, 255));
+        Nomeapp.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/user.png"))); // NOI18N
+        Nomeapp.setText("Nome");
 
         jTextField1.setBackground(new java.awt.Color(51, 51, 51));
         jTextField1.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
@@ -364,10 +389,28 @@ public class CurtidasFrame extends javax.swing.JFrame {
         jLabel2.setForeground(new java.awt.Color(255, 255, 255));
         jLabel2.setText("Musicas Curtidas");
 
-        jTextField2.setBackground(new java.awt.Color(51, 51, 51));
-        jTextField2.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        jTextField2.setForeground(new java.awt.Color(255, 255, 255));
-        jTextField2.setHorizontalAlignment(javax.swing.JTextField.LEFT);
+        lbl_id.setBackground(new java.awt.Color(51, 51, 51));
+        lbl_id.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        lbl_id.setForeground(new java.awt.Color(255, 255, 255));
+        lbl_id.setHorizontalAlignment(javax.swing.JTextField.LEFT);
+
+        btn_fav.setBackground(new java.awt.Color(51, 51, 51));
+        btn_fav.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/like.png"))); // NOI18N
+        btn_fav.setBorder(null);
+        btn_fav.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btn_favMouseClicked(evt);
+            }
+        });
+
+        btn_delete_curtida.setBackground(new java.awt.Color(51, 51, 51));
+        btn_delete_curtida.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/trash.png"))); // NOI18N
+        btn_delete_curtida.setBorder(null);
+        btn_delete_curtida.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btn_delete_curtidaMouseClicked(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -385,16 +428,21 @@ public class CurtidasFrame extends javax.swing.JFrame {
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addComponent(jLabel2)
-                                .addGap(216, 216, 216)
-                                .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(19, 19, 19))
+                                .addGap(160, 160, 160)
+                                .addComponent(lbl_id, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 543, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 543, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(Nomeapp)
+                                .addGap(36, 36, 36))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(btn_fav)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jLabel1)
-                        .addGap(36, 36, 36))))
+                                .addComponent(btn_delete_curtida)
+                                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -404,12 +452,15 @@ public class CurtidasFrame extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jLabel1)
+                        .addComponent(Nomeapp)
                         .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel2)
-                    .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jLabel2)
+                        .addComponent(lbl_id, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(btn_fav)
+                    .addComponent(btn_delete_curtida))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 12, Short.MAX_VALUE)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 298, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
@@ -429,36 +480,47 @@ public class CurtidasFrame extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jLabel6MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel6MouseClicked
-        PlaylistFrame pf = new PlaylistFrame();
-        pf.setVisible(true);
-        this.setVisible(false);
-    }//GEN-LAST:event_jLabel6MouseClicked
-
-    private void jLabel10MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel10MouseClicked
-        HistoricoFrame hf = new HistoricoFrame();
-        hf.setVisible(true);
-        this.setVisible(false);
-    }//GEN-LAST:event_jLabel10MouseClicked
-
-    private void jLabel12MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel12MouseClicked
-        System.exit(0);
-    }//GEN-LAST:event_jLabel12MouseClicked
+    private void jLabel14jLabel10MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel14jLabel10MouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jLabel14jLabel10MouseClicked
 
     private void jLabel15MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel15MouseClicked
         // TODO add your handling code here:
     }//GEN-LAST:event_jLabel15MouseClicked
 
-    private void jLabel14jLabel10MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel14jLabel10MouseClicked
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jLabel14jLabel10MouseClicked
+    private void jLabel12MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel12MouseClicked
+        System.exit(0);
+    }//GEN-LAST:event_jLabel12MouseClicked
 
+    private void jLabel10MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel10MouseClicked
+        HistoricoFrame hf = new HistoricoFrame(conn, aluno);
+        hf.setVisible(true);
+        this.setVisible(false);
+    }//GEN-LAST:event_jLabel10MouseClicked
+
+    private void jLabel6MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel6MouseClicked
+        PlaylistFrame pf = new PlaylistFrame(conn, aluno);
+        pf.setVisible(true);
+        this.setVisible(false);
+    }//GEN-LAST:event_jLabel6MouseClicked
+    private void btn_favMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_favMouseClicked
+        String idMusicaStr = lbl_id.getText();
+        controllerCurtida.curtirMusica(idMusicaStr);
+        carregarMusicasCurtidas(); 
+    }//GEN-LAST:event_btn_favMouseClicked
+
+    private void btn_delete_curtidaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_delete_curtidaMouseClicked
+        String idMusicaStr = lbl_id.getText();
+        controllerCurtida.deletarCurtida(idMusicaStr);
+        carregarMusicasCurtidas(); 
+    }//GEN-LAST:event_btn_delete_curtidaMouseClicked
     /**
      * @param args the command line arguments
      */
-   
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel Nomeapp;
+    private javax.swing.JButton btn_delete_curtida;
+    private javax.swing.JButton btn_fav;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
@@ -477,6 +539,6 @@ public class CurtidasFrame extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;
     private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
+    private javax.swing.JTextField lbl_id;
     // End of variables declaration//GEN-END:variables
 }
