@@ -74,7 +74,7 @@ Se quiser rodar o projeto, é só seguir esses passos:
 
 Esse projeto foi bem legal de fazer. Pude aplicar bastante coisa que aprendi e também entender melhor como é estruturar uma aplicação maior em Java. Além disso, foi um ótimo exercício pra pensar em usabilidade e deixar a interface clara.
 
-Claro que ainda dá pra melhorar muita coisa: como colocar um player real de música, adicionar mais segurança no login (tipo criptografia de senha), ou até levar tudo isso pra web ou mobile. Mas como projeto acadêmico, acho que cumpre bem o papel.
+Claro que ainda dá pra melhorar muita coisa: como colocar um player real de música, adicionar mais segurança no login (tipo criptografia de senha), ou até levar tudo isso pra web ou mobile. Mas como projeto, acho que cumpre bem o papel.
 
 Se quiser dar uma olhada no código, fique à vontade!
 
