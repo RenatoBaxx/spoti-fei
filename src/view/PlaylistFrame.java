@@ -481,7 +481,9 @@ public class PlaylistFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_jLabel15MouseClicked
 
     private void jLabel14jLabel10MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel14jLabel10MouseClicked
-        // TODO add your handling code here:
+        Home hf = new Home(conn, aluno);
+        hf.setVisible(true);
+        this.setVisible(false);
     }//GEN-LAST:event_jLabel14jLabel10MouseClicked
 
     private void btn_add_playlistMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_add_playlistMouseClicked

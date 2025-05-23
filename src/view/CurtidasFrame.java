@@ -511,7 +511,7 @@ public class CurtidasFrame extends javax.swing.JFrame {
 
     private void btn_delete_curtidaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_delete_curtidaMouseClicked
         String idMusicaStr = lbl_id.getText();
-        controllerCurtida.deletarCurtida(idMusicaStr);
+        controllerCurtida.descurtirMusica(idMusicaStr);
         carregarMusicasCurtidas(); 
     }//GEN-LAST:event_btn_delete_curtidaMouseClicked
     /**
