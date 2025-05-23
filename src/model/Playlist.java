@@ -12,8 +12,20 @@ public class Playlist {
     private int id;
     private String nome;
     private Aluno dono;
+    private String[] idsMusicas;
 
     public Playlist() {
+    }
+    
+    public Playlist(int id, String nome) {
+    this.id = id;
+    this.nome = nome;
+    }
+
+    
+    public Playlist(String nome, String[] idsMusicas) {
+    this.nome = nome;
+    this.idsMusicas = idsMusicas;
     }
 
     public Playlist(int id, String nome, Aluno dono) {
@@ -44,5 +56,8 @@ public class Playlist {
 
     public void setDono(Aluno dono) {
         this.dono = dono;
+    }
+    public String[] getIdsMusicas() {   
+        return idsMusicas; 
     }
 }
