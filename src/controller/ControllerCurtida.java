@@ -22,49 +22,49 @@ public class ControllerCurtida {
         this.aluno = aluno;
     }
 
-    public void curtirMusica(String idMusicaStr) {
-        try {
-            int idMusica = Integer.parseInt(idMusicaStr);
-            int idAluno = buscarIdAlunoPorNome(aluno.getNome());
+   public void curtirMusica(String idMusicaStr) {
+    try {
+        int idMusica = Integer.parseInt(idMusicaStr); // você esqueceu disso
+        int idAluno = buscarIdAlunoPorNome(aluno.getNome());
 
-            if (idAluno == -1) {
-                JOptionPane.showMessageDialog(null, "Aluno não encontrado.");
-                return;
-            }
-
-            String tipo = "curtir";
-            Date data = new Date(System.currentTimeMillis());
-
-            String sql = "INSERT INTO curtida (id_aluno, id_musica, tipo, data) VALUES (?, ?, ?, ?)";
-            PreparedStatement stmt = conn.prepareStatement(sql);
-            stmt.setInt(1, idAluno);
-            stmt.setInt(2, idMusica);
-            stmt.setString(3, tipo);
-            stmt.setDate(4, data);
-
-            int rowsInserted = stmt.executeUpdate();
-            if (rowsInserted > 0) {
-                JOptionPane.showMessageDialog(null, "Música curtida com sucesso!");
-            }
-        } catch (NumberFormatException e) {
-            JOptionPane.showMessageDialog(null, "ID da música inválido.");
-        } catch (SQLException e) {
-            JOptionPane.showMessageDialog(null, "Erro ao curtir música: " + e.getMessage());
+        if (idAluno == -1) {
+            JOptionPane.showMessageDialog(null, "Aluno não encontrado.");
+            return;
         }
-    }
 
-    private int buscarIdAlunoPorNome(String nome) throws SQLException {
-        String sql = "SELECT id FROM aluno WHERE nome = ?";
-        try (PreparedStatement stmt = conn.prepareStatement(sql)) {
-            stmt.setString(1, nome);
-            ResultSet rs = stmt.executeQuery();
-            if (rs.next()) {
-                return rs.getInt("id");
-            }
+        Date data = new Date(System.currentTimeMillis());
+
+        String checkSql = "SELECT * FROM curtida WHERE id_aluno = ? AND id_musica = ?";
+        PreparedStatement checkStmt = conn.prepareStatement(checkSql);
+        checkStmt.setInt(1, idAluno);
+        checkStmt.setInt(2, idMusica);
+        ResultSet rs = checkStmt.executeQuery();
+
+        if (rs.next()) {
+            String updateSql = "UPDATE curtida SET tipo = 'curtir', data = ? WHERE id_aluno = ? AND id_musica = ?";
+            PreparedStatement updateStmt = conn.prepareStatement(updateSql);
+            updateStmt.setDate(1, data);
+            updateStmt.setInt(2, idAluno);
+            updateStmt.setInt(3, idMusica);
+            updateStmt.executeUpdate();
+            JOptionPane.showMessageDialog(null, "Curtida atualizada.");
+        } else {
+            String insertSql = "INSERT INTO curtida (id_aluno, id_musica, tipo, data) VALUES (?, ?, 'curtir', ?)";
+            PreparedStatement insertStmt = conn.prepareStatement(insertSql);
+            insertStmt.setInt(1, idAluno);
+            insertStmt.setInt(2, idMusica);
+            insertStmt.setDate(3, data);
+            insertStmt.executeUpdate();
+            JOptionPane.showMessageDialog(null, "Música curtida com sucesso!");
         }
-        return -1; // não encontrado
+
+    } catch (NumberFormatException e) {
+        JOptionPane.showMessageDialog(null, "ID da música inválido.");
+    } catch (SQLException e) {
+        JOptionPane.showMessageDialog(null, "Erro ao curtir música: " + e.getMessage());
     }
-    
+}
+
 
 
     public DefaultTableModel getTabelaMusicasCurtidas() {
@@ -96,7 +96,7 @@ public class ControllerCurtida {
     return modelo;
 }
     
-    public void deletarCurtida(String idMusicaStr) {
+    public void descurtirMusica(String idMusicaStr) {
     try {
         int idMusica = Integer.parseInt(idMusicaStr);
         int idAluno = buscarIdAlunoPorNome(aluno.getNome());
@@ -106,23 +106,46 @@ public class ControllerCurtida {
             return;
         }
 
-        String sql = "DELETE FROM curtida WHERE id_aluno = ? AND id_musica = ? AND tipo = 'curtir'";
-        PreparedStatement stmt = conn.prepareStatement(sql);
-        stmt.setInt(1, idAluno);
-        stmt.setInt(2, idMusica);
+        Date data = new Date(System.currentTimeMillis());
 
-        int rowsDeleted = stmt.executeUpdate();
-        if (rowsDeleted > 0) {
-            JOptionPane.showMessageDialog(null, "Curtida removida com sucesso!");
+        String checkSql = "SELECT * FROM curtida WHERE id_aluno = ? AND id_musica = ?";
+        PreparedStatement checkStmt = conn.prepareStatement(checkSql);
+        checkStmt.setInt(1, idAluno);
+        checkStmt.setInt(2, idMusica);
+        ResultSet rs = checkStmt.executeQuery();
+
+        if (rs.next()) {
+            String updateSql = "UPDATE curtida SET tipo = 'descurtir', data = ? WHERE id_aluno = ? AND id_musica = ?";
+            PreparedStatement updateStmt = conn.prepareStatement(updateSql);
+            updateStmt.setDate(1, data);
+            updateStmt.setInt(2, idAluno);
+            updateStmt.setInt(3, idMusica);
+            updateStmt.executeUpdate();
+            JOptionPane.showMessageDialog(null, "Descurtida atualizada.");
         } else {
-            JOptionPane.showMessageDialog(null, "Nenhuma curtida encontrada para remover.");
+            String insertSql = "INSERT INTO curtida (id_aluno, id_musica, tipo, data) VALUES (?, ?, 'descurtir', ?)";
+            PreparedStatement insertStmt = conn.prepareStatement(insertSql);
+            insertStmt.setInt(1, idAluno);
+            insertStmt.setInt(2, idMusica);
+            insertStmt.setDate(3, data);
+            insertStmt.executeUpdate();
+            JOptionPane.showMessageDialog(null, "Música descurtida com sucesso!");
         }
 
     } catch (NumberFormatException e) {
         JOptionPane.showMessageDialog(null, "ID da música inválido.");
     } catch (SQLException e) {
-        JOptionPane.showMessageDialog(null, "Erro ao remover curtida: " + e.getMessage());
+        JOptionPane.showMessageDialog(null, "Erro ao descurtir música: " + e.getMessage());
     }
+}
+
+    
+        private int buscarIdAlunoPorNome(String nome) throws SQLException {
+        String sql = "SELECT id FROM aluno WHERE nome = ?";
+        PreparedStatement stmt = conn.prepareStatement(sql);
+        stmt.setString(1, nome);
+        ResultSet rs = stmt.executeQuery();
+        return rs.next() ? rs.getInt("id") : -1;
 }
 
 

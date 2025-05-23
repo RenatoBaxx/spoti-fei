@@ -7,6 +7,7 @@ package view;
 import java.sql.Connection;
 import model.Aluno;
 import controller.ControllerPlaylist;
+import javax.swing.JOptionPane;
 import model.Playlist;
 
 
@@ -145,17 +146,18 @@ public class NovaPlaylistFrame extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btn_fecharMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_fecharMouseClicked
-       String nome = lbl_nome_playlist.getText().trim();
-       String[] ids = lbl_musica_id.getText().trim().split(",");
-
-       Playlist playlist = new Playlist(nome, ids);
-       controllerPlaylist.criarPlaylist(playlist, aluno);
-       controllerPlaylist.carregarPlaylists();
-       this.setVisible(false);
+        this.dispose();
     }//GEN-LAST:event_btn_fecharMouseClicked
 
     private void btn_criar_playlist1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_criar_playlist1MouseClicked
-       this.dispose();
+ 
+        String nome = lbl_nome_playlist.getText().trim();
+        String[] ids = lbl_musica_id.getText().trim().split(",");
+
+        Playlist playlist = new Playlist(nome, ids);
+        controllerPlaylist.criarPlaylist(playlist, aluno);
+        controllerPlaylist.carregarPlaylists();
+        this.setVisible(false);
     }//GEN-LAST:event_btn_criar_playlist1MouseClicked
 
     /**
