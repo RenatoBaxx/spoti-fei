@@ -4,6 +4,7 @@
  */
 package view;
 
+import controller.ControllerHistorico;
 import controller.ControllerHome;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -24,12 +25,16 @@ import view.HistoricoFrame;
 public class HistoricoFrame extends javax.swing.JFrame {
     private Connection conn;
     private Aluno aluno;
+    private ControllerHistorico controllerHistorico;
+
 
     public HistoricoFrame(Connection conn, Aluno aluno) {
         this.conn = conn;
         this.aluno = aluno;
         initComponents();
         Nomeapp.setText(aluno.getNome());
+        controllerHistorico = new ControllerHistorico(conn, aluno);
+        jTable1.setModel(controllerHistorico.ultimasBuscas());
     }
 
     public HistoricoFrame() {
@@ -202,6 +207,9 @@ public class HistoricoFrame extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
         jLabel2 = new javax.swing.JLabel();
+        btn_ultimas_buscas = new javax.swing.JButton();
+        btn_cutidas = new javax.swing.JButton();
+        btn_descurtidas = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -376,6 +384,33 @@ public class HistoricoFrame extends javax.swing.JFrame {
         jLabel2.setForeground(new java.awt.Color(255, 255, 255));
         jLabel2.setText("Historico");
 
+        btn_ultimas_buscas.setBackground(new java.awt.Color(102, 102, 102));
+        btn_ultimas_buscas.setForeground(new java.awt.Color(255, 255, 255));
+        btn_ultimas_buscas.setText("Ultimas Buscas");
+        btn_ultimas_buscas.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btn_ultimas_buscasMouseClicked(evt);
+            }
+        });
+
+        btn_cutidas.setBackground(new java.awt.Color(102, 102, 102));
+        btn_cutidas.setForeground(new java.awt.Color(255, 255, 255));
+        btn_cutidas.setText("Curtidas");
+        btn_cutidas.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btn_cutidasMouseClicked(evt);
+            }
+        });
+
+        btn_descurtidas.setBackground(new java.awt.Color(102, 102, 102));
+        btn_descurtidas.setForeground(new java.awt.Color(255, 255, 255));
+        btn_descurtidas.setText("Descurtidas");
+        btn_descurtidas.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btn_descurtidasMouseClicked(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -398,7 +433,13 @@ public class HistoricoFrame extends javax.swing.JFrame {
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jLabel2)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btn_ultimas_buscas)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btn_cutidas)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btn_descurtidas)
+                        .addContainerGap())))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -411,7 +452,11 @@ public class HistoricoFrame extends javax.swing.JFrame {
                         .addComponent(Nomeapp)
                         .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jLabel2)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel2)
+                    .addComponent(btn_ultimas_buscas)
+                    .addComponent(btn_cutidas)
+                    .addComponent(btn_descurtidas))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 298, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
@@ -455,6 +500,18 @@ public class HistoricoFrame extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jLabel14jLabel10MouseClicked
 
+    private void btn_ultimas_buscasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_ultimas_buscasMouseClicked
+        jTable1.setModel(controllerHistorico.ultimasBuscas());
+    }//GEN-LAST:event_btn_ultimas_buscasMouseClicked
+
+    private void btn_cutidasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_cutidasMouseClicked
+        jTable1.setModel(controllerHistorico.listarCurtidas("curtir"));
+    }//GEN-LAST:event_btn_cutidasMouseClicked
+
+    private void btn_descurtidasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_descurtidasMouseClicked
+        jTable1.setModel(controllerHistorico.listarCurtidas("descurtir"));
+    }//GEN-LAST:event_btn_descurtidasMouseClicked
+
     /**
      * @param args the command line arguments
      */
@@ -462,6 +519,9 @@ public class HistoricoFrame extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel Nomeapp;
+    private javax.swing.JButton btn_cutidas;
+    private javax.swing.JButton btn_descurtidas;
+    private javax.swing.JButton btn_ultimas_buscas;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;

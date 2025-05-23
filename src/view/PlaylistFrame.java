@@ -16,6 +16,7 @@ import javax.swing.JButton;
 import view.PlaylistFrame;
 import view.CurtidasFrame;
 import view.HistoricoFrame;
+import controller.ControllerPlaylist;
 
 /**
  *
@@ -24,16 +25,20 @@ import view.HistoricoFrame;
 public class PlaylistFrame extends javax.swing.JFrame {
     private Connection conn;
     private Aluno aluno;
+    private ControllerPlaylist controllerPlaylist;
 
-    /**
-     * Creates new form PlaylistFrame
-     */
+
     public PlaylistFrame(Connection conn, Aluno aluno) {
         this.conn = conn;
         this.aluno = aluno;
         initComponents();
+
+        controllerPlaylist = new ControllerPlaylist(conn, this, aluno); 
+        controllerPlaylist.carregarPlaylists();
+
         Nomeapp.setText(aluno.getNome());
     }
+
 
     public JLabel getjLabel1() {
         return Nomeapp;
@@ -173,6 +178,7 @@ public class PlaylistFrame extends javax.swing.JFrame {
     
     
     
+    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -202,6 +208,8 @@ public class PlaylistFrame extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
         jLabel2 = new javax.swing.JLabel();
+        btn_add_playlist = new javax.swing.JButton();
+        btn_edit_playlist = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -363,7 +371,7 @@ public class PlaylistFrame extends javax.swing.JFrame {
                 {null, null, null}
             },
             new String [] {
-                "Nome", "Artista", "Duração"
+                "id", "Nome", "Musicas"
             }
         ));
         jScrollPane1.setViewportView(jTable1);
@@ -371,6 +379,24 @@ public class PlaylistFrame extends javax.swing.JFrame {
         jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(255, 255, 255));
         jLabel2.setText("Minhas Playlist");
+
+        btn_add_playlist.setBackground(new java.awt.Color(51, 51, 51));
+        btn_add_playlist.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/add.png"))); // NOI18N
+        btn_add_playlist.setBorder(null);
+        btn_add_playlist.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btn_add_playlistMouseClicked(evt);
+            }
+        });
+
+        btn_edit_playlist.setBackground(new java.awt.Color(51, 51, 51));
+        btn_edit_playlist.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/edit.png"))); // NOI18N
+        btn_edit_playlist.setBorder(null);
+        btn_edit_playlist.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btn_edit_playlistMouseClicked(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -380,6 +406,10 @@ public class PlaylistFrame extends javax.swing.JFrame {
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(11, 11, 11)
+                        .addComponent(jScrollPane1)
+                        .addContainerGap())
+                    .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(21, 21, 21)
                         .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 543, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -388,13 +418,13 @@ public class PlaylistFrame extends javax.swing.JFrame {
                         .addComponent(Nomeapp)
                         .addGap(36, 36, 36))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(11, 11, 11)
-                        .addComponent(jScrollPane1)
-                        .addContainerGap())
-                    .addGroup(jPanel1Layout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jLabel2)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btn_add_playlist, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(btn_edit_playlist, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(27, 27, 27))))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -406,9 +436,12 @@ public class PlaylistFrame extends javax.swing.JFrame {
                     .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(Nomeapp)
                         .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 36, Short.MAX_VALUE)
-                .addComponent(jLabel2)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 42, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(btn_add_playlist, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(btn_edit_playlist, javax.swing.GroupLayout.Alignment.TRAILING))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 298, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
@@ -451,11 +484,23 @@ public class PlaylistFrame extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jLabel14jLabel10MouseClicked
 
+    private void btn_add_playlistMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_add_playlistMouseClicked
+        NovaPlaylistFrame npf = new NovaPlaylistFrame(conn, aluno, this);
+        npf.setVisible(true);
+    }//GEN-LAST:event_btn_add_playlistMouseClicked
+
+    private void btn_edit_playlistMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_edit_playlistMouseClicked
+        EditPlaylistFrame epf = new EditPlaylistFrame(conn, aluno, this);
+        epf.setVisible(true);
+    }//GEN-LAST:event_btn_edit_playlistMouseClicked
+
     /**
      * @param args the command line arguments
      */
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel Nomeapp;
+    private javax.swing.JButton btn_add_playlist;
+    private javax.swing.JButton btn_edit_playlist;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
@@ -475,4 +520,5 @@ public class PlaylistFrame extends javax.swing.JFrame {
     private javax.swing.JTable jTable1;
     private javax.swing.JTextField jTextField1;
     // End of variables declaration//GEN-END:variables
+
 }
